@@ -1,4 +1,4 @@
-import { getProductById } from "@/lib/actions"
+import { getProductById } from "@/lib/actions";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { formatNumber } from "@/lib/utils";
@@ -6,24 +6,18 @@ import PriceInfoCard from "@/components/PriceInfoCard";
 import { Product } from "@/types";
 import Image from "next/image";
 
-
-type Props = {
-  params: { id : string}
-}
-
-const Page = async ({params}: Props) => {
+const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
-  const product: Product =  await getProductById(id);
+  const product: Product = await getProductById(id);
 
-  if(!product) redirect('/')
-
+  if (!product) redirect("/");
 
   return (
     <div className="product-container">
       <div className="flex gap-28 xl:flex-row flex-col">
         <div className="product-image">
-          <Image 
+          <Image
             className="mx-auto"
             src={product.image}
             alt={product.title}
@@ -39,9 +33,9 @@ const Page = async ({params}: Props) => {
                 {product.title}
               </p>
 
-              <Link 
+              <Link
                 href={product.url}
-                target="_blank" 
+                target="_blank"
                 className="text-base text-black opacity-50"
               >
                 Visit Product
@@ -59,80 +53,85 @@ const Page = async ({params}: Props) => {
                 </p>
               </div>
 
-               <div className="flex flex-col gap-4">
-              <div className="flex gap-3">
-                <div className="text-sm text-black opacity-50">
-                    <span className="text-primary-green font-semibold">{formatNumber(product.discountRate)}  </span> %
+              <div className="flex flex-col gap-4">
+                <div className="flex gap-3">
+                  <div className="text-sm text-black opacity-50">
+                    <span className="text-primary-green font-semibold">
+                      {formatNumber(product.discountRate)}{" "}
+                    </span>{" "}
+                    %
+                  </div>
+
+                  <div className="product-stars">
+                    <Image
+                      src="/assets/icons/star.svg"
+                      alt="star"
+                      width={16}
+                      height={16}
+                    />
+                  </div>
+
+                  <div className="product-reviews">
+                    <Image
+                      src="/assets/icons/comment.svg"
+                      alt="comment"
+                      width={16}
+                      height={16}
+                    />
+                  </div>
                 </div>
 
-
-                <div className="product-stars">
-                  <Image 
-                    src="/assets/icons/star.svg"
-                    alt="star"
-                    width={16}
-                    height={16}
-                  />
-                  
-                </div>
-
-                <div className="product-reviews">
-                  <Image 
-                    src="/assets/icons/comment.svg"
-                    alt="comment"
-                    width={16}
-                    height={16}
-                  />
-                  
-                </div>
+                <p className="text-sm text-black opacity-50">
+                  <span className="text-primary-green font-semibold">93% </span>
+                  of buyers have recommended this.
+                </p>
               </div>
-
-              <p className="text-sm text-black opacity-50">
-                <span className="text-primary-green font-semibold">93% </span> of
-                buyers have recommeded this.
-              </p>
             </div>
-          </div>
-          
 
             <div className="my-7 flex flex-col gap-5">
               <div className="flex gap-5 flex-wrap">
                 <PriceInfoCard
                   title="Current Price"
                   iconSrc="/assets/icons/price-tag.svg"
-                  value= {`${product.currency} ${formatNumber(product.currentPrice)}`}
+                  value={`${product.currency} ${formatNumber(
+                    product.currentPrice
+                  )}`}
                   borderColor="#b6dbff"
                 />
 
                 <PriceInfoCard
                   title="Original Price"
                   iconSrc="/assets/icons/price-tag.svg"
-                  value= {`${product.currency} ${formatNumber(product.realPrice)}`}
+                  value={`${product.currency} ${formatNumber(
+                    product.realPrice
+                  )}`}
                   borderColor="#b6dbff"
                 />
 
                 <PriceInfoCard
                   title="Lowest Price"
                   iconSrc="/assets/icons/price-tag.svg"
-                  value= {`${product.currency} ${formatNumber(product.lowestPrice)}`}
+                  value={`${product.currency} ${formatNumber(
+                    product.lowestPrice
+                  )}`}
                   borderColor="#b6dbff"
                 />
 
                 <PriceInfoCard
                   title="Highest Price"
                   iconSrc="/assets/icons/price-tag.svg"
-                  value= {`${product.currency} ${formatNumber(product.highestPrice)}`}
+                  value={`${product.currency} ${formatNumber(
+                    product.highestPrice
+                  )}`}
                   borderColor="#b6dbff"
                 />
-
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
