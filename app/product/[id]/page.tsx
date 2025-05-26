@@ -6,8 +6,15 @@ import PriceInfoCard from "@/components/PriceInfoCard";
 import { Product } from "@/types";
 import Image from "next/image";
 
-const Page = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+type PageProps = {
+  params: { id: string }
+};
+
+const Page = async (props: PageProps) => {
+  const { id } = props.params;
+
+
+  // const { id } = params;
 
   const product: Product = await getProductById(id);
 
