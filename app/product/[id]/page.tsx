@@ -11,8 +11,8 @@ type Props = {
   params: { id : string}
 }
 
-const ProductDetails = async (props: Props) => {
-  const { id } = props.params;
+const Page = async ({params}: Props) => {
+  const { id } = params;
 
   const product: Product =  await getProductById(id);
 
@@ -135,4 +135,4 @@ const ProductDetails = async (props: Props) => {
   )
 }
 
-export default ProductDetails
+export default Page
