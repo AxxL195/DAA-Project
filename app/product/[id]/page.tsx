@@ -7,15 +7,11 @@ import { Product } from "@/types";
 import Image from "next/image";
 
 type PageProps = {
-  params: { id: string }
+  params: { id: string };
 };
 
-const Page = async (props: PageProps) => {
-  const { id } = props.params;
-
-
-  // const { id } = params;
-
+const Page = async ({ params }: PageProps) => {
+  const { id } = params;
   const product: Product = await getProductById(id);
 
   if (!product) redirect("/");
